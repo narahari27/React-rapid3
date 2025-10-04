@@ -1,2 +1,4 @@
-# React-rapid3
-Learning React JS 🚀
+# REact Hooks
+(Normal JS Utility Functions)
+- useState() - superpowerful react variables
+-useEffect()
