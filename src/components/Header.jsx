@@ -10,7 +10,7 @@ const Header = () => {
   // },[btnReact]);
   const onlineStatus = useOnlineStatus();
   return (
-    <div className="header">
+    <div className="header flex justify-between items-center">
       <div className="logo-container">
         <img
           className="logo"
@@ -19,18 +19,18 @@ const Header = () => {
         />
       </div>
       <div className="nav-items">
-        <ul className="nav-btn">
-          <li>
+        <ul className="nav-btn flex items-center">
+          <li className="px-4">
             OnlineStatus:{onlineStatus ? '✔' : '⛔'}
           </li>
-          <li>
+          <li className="px-4">
             <Link to="/">Home</Link>
           </li>
-          <li><Link className="" to="/about">About</Link></li>
-          <li><Link to="/contact">Contact US</Link></li>
-          <li><Link to="/grocerry">Grocerry</Link></li>
-          <li><Link to="/">Cart</Link></li>
-          <button onClick={()=>{
+          <li className="px-4"><Link className="" to="/about">About</Link></li>
+          <li className="px-4"><Link to="/contact">Contact US</Link></li>
+          <li className="px-4"><Link to="/grocerry">Grocerry</Link></li>
+          <li className="px-4"><Link to="/">Cart</Link></li>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=>{
             btnReact == 'login'? setBtnReact('logout') :
             setBtnReact('login');
           }}>{btnReact}</button>
