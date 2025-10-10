@@ -34,7 +34,7 @@ const Body = () => {
   if (onlineStatus == false) {
     return <h1>Hey you are offline !!!</h1>;
   }
-   console.log('listof Restaurants:',listOfRestaurants)
+  //  console.log('listof Restaurants:',listOfRestaurants)
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
