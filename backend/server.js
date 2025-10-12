@@ -1,210 +1,201 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 
 const app = express();
-const PORT = 5000;
+const PORT = 5001;
 
 app.use(cors());
 
-// Mock data that matches Swiggy's structure
+// Mock data generator
 const createMockMenu = (resId) => ({
   statusCode: 0,
   data: {
     statusMessage: "done successfully",
     cards: [
-      {}, // Card 0 - empty
-      {}, // Card 1 - empty
-      {   // Card 2 - Restaurant Info
+      {},
+      {},
+      {
         card: {
           card: {
-            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            "@type":
+              "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
             info: {
               id: resId,
-              name: "Pizza Hut",
+              name: "Tasty Bites Restaurant",
               city: "Bangalore",
               areaName: "Koramangala",
-              cuisines: ["Pizzas", "Italian", "Pastas", "Desserts"],
-              cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
-              avgRating: 4.2,
-              costForTwoMessage: "₹350 for two",
-              deliveryTime: 30
-            }
-          }
-        }
+              cuisines: ["North Indian", "Chinese", "South Indian", "Biryani"],
+              cloudinaryImageId: "restaurant_image",
+              avgRating: 4.3,
+              costForTwoMessage: "₹400 for two",
+              deliveryTime: 35,
+            },
+          },
+        },
       },
-      {}, // Card 3 - empty
-      {   // Card 4 - Menu Items
+      {},
+      {
         groupedCard: {
           cardGroupMap: {
             REGULAR: {
               cards: [
-                {}, // Empty card 0
-                {}, // Empty card 1
-                {   // Card 2 - First Category
+                {},
+                {},
+                {
                   card: {
                     card: {
-                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "@type":
+                        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
                       title: "Recommended",
                       itemCards: [
                         {
                           card: {
                             info: {
                               id: "101",
-                              name: "Margherita Pizza",
-                              category: "Pizza",
-                              price: 29900,
-                              description: "Classic delight with 100% real mozzarella cheese",
-                              imageId: "margherita_pizza",
-                              isVeg: 1
-                            }
-                          }
+                              name: "Butter Chicken",
+                              category: "Main Course",
+                              price: 32000,
+                              description:
+                                "Creamy tomato-based curry with tender chicken",
+                              imageId: "butter_chicken",
+                              isVeg: 0,
+                            },
+                          },
                         },
                         {
                           card: {
                             info: {
                               id: "102",
-                              name: "Pepperoni Pizza",
-                              category: "Pizza",
-                              price: 39900,
-                              description: "American classic! Loaded with pepperoni",
-                              imageId: "pepperoni_pizza",
-                              isVeg: 0
-                            }
-                          }
+                              name: "Paneer Tikka Masala",
+                              category: "Main Course",
+                              price: 28000,
+                              description:
+                                "Cottage cheese in rich tomato gravy",
+                              imageId: "paneer_tikka",
+                              isVeg: 1,
+                            },
+                          },
                         },
                         {
                           card: {
                             info: {
                               id: "103",
-                              name: "Farmhouse Pizza",
-                              category: "Pizza",
-                              price: 42900,
-                              description: "Delightful combination of onion, capsicum, tomato & grilled mushroom",
-                              imageId: "farmhouse_pizza",
-                              isVeg: 1
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
+                              name: "Chicken Biryani",
+                              category: "Rice",
+                              price: 29000,
+                              description:
+                                "Aromatic basmati rice with spiced chicken",
+                              imageId: "biryani",
+                              isVeg: 0,
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
                 },
-                {   // Card 3 - Second Category
+                {
                   card: {
                     card: {
-                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
-                      title: "Sides & Beverages",
+                      "@type":
+                        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      title: "Starters",
                       itemCards: [
                         {
                           card: {
                             info: {
                               id: "201",
-                              name: "Garlic Bread",
-                              category: "Sides",
-                              price: 12900,
-                              description: "Freshly baked garlic bread with herbs",
-                              imageId: "garlic_bread",
-                              isVeg: 1
-                            }
-                          }
+                              name: "Chicken 65",
+                              category: "Starters",
+                              price: 24000,
+                              description: "Spicy fried chicken",
+                              imageId: "chicken65",
+                              isVeg: 0,
+                            },
+                          },
                         },
                         {
                           card: {
                             info: {
                               id: "202",
-                              name: "Chicken Wings",
-                              category: "Sides",
-                              price: 24900,
-                              description: "Spicy chicken wings - 6 pieces",
-                              imageId: "chicken_wings",
-                              isVeg: 0
-                            }
-                          }
+                              name: "Paneer 65",
+                              category: "Starters",
+                              price: 22000,
+                              description: "Crispy fried paneer",
+                              imageId: "paneer65",
+                              isVeg: 1,
+                            },
+                          },
                         },
-                        {
-                          card: {
-                            info: {
-                              id: "203",
-                              name: "Pepsi (500ml)",
-                              category: "Beverages",
-                              price: 5700,
-                              description: "Chilled Pepsi",
-                              imageId: "pepsi",
-                              isVeg: 1
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
+                      ],
+                    },
+                  },
                 },
-                {   // Card 4 - Third Category
+                {
                   card: {
                     card: {
-                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
-                      title: "Desserts",
+                      "@type":
+                        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      title: "Breads",
                       itemCards: [
                         {
                           card: {
                             info: {
                               id: "301",
-                              name: "Chocolate Lava Cake",
-                              category: "Desserts",
-                              price: 11900,
-                              description: "Chocolate cake with molten chocolate inside",
-                              imageId: "lava_cake",
-                              isVeg: 1
-                            }
-                          }
+                              name: "Butter Naan",
+                              category: "Breads",
+                              price: 6000,
+                              description: "Soft bread with butter",
+                              imageId: "naan",
+                              isVeg: 1,
+                            },
+                          },
                         },
                         {
                           card: {
                             info: {
                               id: "302",
-                              name: "Brownie with Ice Cream",
-                              category: "Desserts",
-                              price: 14900,
-                              description: "Warm brownie with vanilla ice cream",
-                              imageId: "brownie_icecream",
-                              isVeg: 1
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    ]
-  }
+                              name: "Garlic Naan",
+                              category: "Breads",
+                              price: 7000,
+                              description: "Naan with garlic",
+                              imageId: "garlic_naan",
+                              isVeg: 1,
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    ],
+  },
 });
 
-app.get('/api/menu/:resId', async (req, res) => {
+app.get("/api/menu/:resId", (req, res) => {
   try {
     const { resId } = req.params;
-    console.log('📡 Fetching menu for restaurant:', resId);
-    
-    // Simulate network delay
-    setTimeout(() => {
-      const mockData = createMockMenu(resId);
-      console.log('✅ Returning mock menu data');
-      res.json(mockData);
-    }, 800);
-    
+    console.log("📡 Request received for restaurant:", resId);
+
+    // Return mock data immediately
+    const mockData = createMockMenu(resId);
+    console.log("✅ Sending mock menu data");
+    res.json(mockData);
   } catch (error) {
-    console.error('❌ Error:', error.message);
-    res.status(500).json({ 
-      error: 'Failed to fetch menu data',
-      details: error.message 
+    console.error("❌ Error:", error.message);
+    res.status(500).json({
+      error: "Failed to fetch menu data",
+      details: error.message,
     });
   }
 });
 
 app.listen(PORT, () => {
   console.log(`🚀 Backend server running on http://localhost:${PORT}`);
-  console.log('📝 Using mock data for menu');
+  console.log("📝 Using mock data for all requests");
 });
