@@ -1,6 +1,13 @@
+import { addItem } from "../utils/CartSlice";
+import { useDispatch } from "react-redux";
 import { CDN_URL } from "../utils/constants";
 const ItemList = ({ items }) => {
-  console.log(items);
+  // console.log(items);
+  const dispatch = useDispatch();
+  const handleAddItem = (item)=>{
+    //Dispatch an Action
+    dispatch (addItem(item))
+  }
   return (
     <div>
         {items.map((item)=>(
@@ -8,10 +15,12 @@ const ItemList = ({ items }) => {
                 <div className="flex justify-between">
                     <div>
                         <span>{item?.card?.info?.name}</span>   
-                 <span>{item?.card?.info?.price/100}</span> 
+                        <span>{item?.card?.info?.price/100}</span> 
                     </div>
-                   <div className="h-14 w-14 rounded-b-sm">
-                    <img src={CDN_URL + item?.card.info?.imageId } alt="" />
+                   <div className=" rounded-b-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    {/* <img src={CDN_URL + item?.card.info?.imageId } alt="" /> */}
+                    <button onClick={()=>handleAddItem(item)}
+                     >Add+</button>
                    </div>
                 </div>
                 <p className="text-xs ">{item?.card?.info?.description}</p>
